@@ -1,0 +1,23 @@
+# Usage:
+#
+# Specify either of the following:
+#
+# i) a single value (used uniformly across all forced words); e.g.,
+#
+# **+
+#
+#
+# ii) one value per forced dimension (used uniformly across all the corresponding forced words); e.g.,
+#
+# *-
+# *-
+# *+
+#
+#
+# iii) one value per forced word; e.g.,
+#
+# + + - +
+# -
+# - +
+
+**+

@@ -1,0 +1,16 @@
+# Usage:
+#
+# Specify the dimension ranges (0-indexed) separated by newlines
+# using Python-like indexing
+#
+# (needs to be free of overlapping intervals)
+
+# (specify the ranges in ascending order to avoid potential bugs)
+#
+#
+# e.g.
+#
+# :12	->	0..11	(dims 1..12)
+# 58	->	58	(dim 59)
+
+:300
