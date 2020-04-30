@@ -10,7 +10,7 @@ In order to train, run ``` imparting_interpretability_demo.sh ``` with corpus, a
 ```bash
 bash imparting_interpretability_demo.sh /path/to/your/corpus 240.0 300 45
 ```
-This demo will initialize training with k = 0.1 and every dimension will be imparted along positive direction. You can change hyperparameters from demo file and from the files in Param folder. Additionally, you can download [pretrained word vectors with k = 0.1 parameter and 300 dimension](https://drive.google.com/file/d/1hpWT3Vc_-JTuPDeYgL5FZAPcSF2fEt6f/view?usp=sharing) trained on a snapshot of English Wikipedia consisting of around 1.1B tokens, with the stop-words filtered out. 
+This demo will initialize training with k = 0.1 and every dimension will be imparted along positive direction. You can change hyperparameters from demo file and from the files in Params folder. Additionally, you can download [pretrained word vectors with k = 0.1 parameter and 300 dimension](https://drive.google.com/file/d/1hpWT3Vc_-JTuPDeYgL5FZAPcSF2fEt6f/view?usp=sharing) trained on a snapshot of English Wikipedia consisting of around 1.1B tokens, with the stop-words filtered out. 
 
 ## Evaluation 
 
