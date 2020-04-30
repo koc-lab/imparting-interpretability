@@ -31,7 +31,7 @@ COOCCURRENCE_FILE=$OUTPUTS_DIR/cooccurrence.bin
 TEMPSHUFFLE=$OUTPUTS_DIR/temp_shuffle
 
 # Imbue initialization files (automatically generated)
-COOCCURRENCE_SHUF_FILE=$IMBUE_INIT_DIR/cooccurrence_$DATETIM.shuf.bin
+COOCCURRENCE_SHUF_FILE=$IMBUE_INIT_DIR/cooccurrence_$DATETIME.shuf.bin
 INIT_FILE=$IMBUE_INIT_DIR/init_$DATETIME.bin
 
 # Imbue parameters (must be specified)
@@ -56,10 +56,14 @@ NUM_THREADS=$4
 X_MAX=75
 
 # Error if the target is invalid
-if [[$TARGET != release]]; then
+if [[ $TARGET != release ]]; then
     echo 'Error: Invalid Makefile target.'
     exit 1; fi
 
+
+if [ ! -d "$IMBUE_INIT_DIR" ]; then
+    mkdir -p $IMBUE_INIT_DIR	
+fi
 
 # Build the target
 set -x
