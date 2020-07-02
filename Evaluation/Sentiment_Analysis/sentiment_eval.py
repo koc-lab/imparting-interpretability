@@ -1,10 +1,10 @@
-from sklearn.model_selection import GridSearchCV
+from hypopt import GridSearch
 from sklearn.svm import SVC
+import numpy as np
 import argparse
 import codecs
 import time
 import re
-import numpy as np
 
 def process_sentence(sentence, vocab_dict):
     sentence = sentence.split()
@@ -93,16 +93,21 @@ def main():
     print('Generating train and test samples from the data for selected classes ...  ', end = '') 
     t = time.time()   
     
-    train_size = sum([1 for label in split_classes if label == 3 or label == 1])
+    train_size = sum([1 for label in split_classes if label == 1])
+    val_size = sum([1 for label in split_classes if label == 3])
     test_size = sum([1 for label in split_classes if label == 2])
     
     train_samples = np.zeros([train_size, vector_dim])
     train_labels = []
     
+    val_samples = np.zeros([val_size, vector_dim])
+    val_labels = []
+    
     test_samples = np.zeros([test_size, vector_dim])
     test_labels = []
     
     train_no = 0
+    val_no = 0
     test_no = 0
     not_in_dict_count = 0
     for sample_no, sentence in enumerate(sentences):
@@ -115,7 +120,7 @@ def main():
         if score <= 0.4 or score > 0.6: # Eliminate noutral sentences
             inds = process_sentence(sentence, vocab_dict)
             if len(inds) > 0:
-                if split_classes[sample_no] == 1 or split_classes[sample_no] == 3:
+                if split_classes[sample_no] == 1:
                     for ind in inds:
                          train_samples[train_no,:] += vectors[ind,:]
                          
@@ -127,6 +132,19 @@ def main():
                         train_labels.append(1)
                         
                     train_no += 1
+                    
+                elif split_classes[sample_no] == 3:
+                    for ind in inds:
+                         val_samples[val_no,:] += vectors[ind,:]
+                         
+                    val_samples[val_no,:] = val_samples[val_no,:]/len(inds)
+                    
+                    if score <= 0.4:
+                        val_labels.append(0)
+                    elif score > 0.6:
+                        val_labels.append(1)
+                    
+                    val_no += 1
                     
                 elif split_classes[sample_no] == 2:
                     for ind in inds:
@@ -142,16 +160,17 @@ def main():
                     test_no += 1
     
     train_samples = train_samples[:train_no,:]
+    val_samples = val_samples[:val_no,:]
     test_samples = test_samples[:test_no,:]
                  
     print("done in " + str(int(time.time() - t)) + " seconds")
       
     
-    print('Training linear SVM with cross validation for parameter optimization ... ', end = '') 
+    print('Training linear SVM for parameter optimization ... ', end = '') 
     
     tuned_parameters = [{'kernel': ['linear'], 'C': [0.001, 0.01, 0.1, 1, 10, 100, 1000]}]    
-    clf = GridSearchCV(SVC(), tuned_parameters, cv=5)
-    clf.fit(train_samples, train_labels)
+    clf = GridSearch(model=SVC(), param_grid=tuned_parameters)
+    clf.fit(train_samples, train_labels, val_samples, val_labels)
     
     print("done in " + str(int(time.time() - t)) + " seconds")  
     
@@ -168,7 +187,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
- 
