@@ -30,5 +30,20 @@ Word intrusion test is a multiple choice test where each choice is a separate wo
 * numpy
 * sklearn
 
+## Citation
+
+If you make use of these tools, please cite following paper.
+
+```
+@article{şenel_utlu_şahinuç_ozaktas_koç_2020, 
+  title={Imparting interpretability to word embeddings while preserving semantic structure}, 
+  author={Şenel, Lütfi Kerem and Utlu, İhsan and Şahinuç, Furkan and Ozaktas, Haldun M. and Koç, Aykut},
+  DOI={10.1017/S1351324920000315}, 
+  journal={Natural Language Engineering}, 
+  publisher={Cambridge University Press}, 
+  year={2020}, 
+  pages={1–26}}
+```
+
 ## Contact Info
 For every issues related to code and implementation please contact aykutkoc.lab@gmail.com
