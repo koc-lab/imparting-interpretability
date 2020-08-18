@@ -26,7 +26,7 @@ bash evaluate_word_similarity.sh /path/to/vector/file
 
 Word intrusion test is a multiple choice test where each choice is a separate word. Four of these words are chosen among the words whose vector values at a specific dimension are high and one is chosen from the words whose vector values are low at that specific dimension. This word is called an intruder word. If the participant can distinguish the intruder word from others, it can be said that this dimension is interpretable. We both used imparted and original GloVe embeddings for comparison. For each dimension of both embeddings, we prepare a question. We shuffled the questions in random order so that participant cannot know which question comes from which embedding. In total, there are 600 questions (300 GloVe + 300 imparted GloVe) with five choices for each. Test can be started by running ``` word_intrusion_offline.py ```. At the end of the test, answers and scores of the participant will be saved as pickle files.
 
-### Requirements for Evalution
+### Requirements for Evaluation
 * numpy
 * sklearn
 
